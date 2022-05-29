@@ -52,6 +52,8 @@ c(2^30, 2^(-15), 1, 2, 3/2)
 
 sqrt(25)
 
+log(exp(1))
+
 exp(1)
 
 log(pi)
@@ -69,7 +71,7 @@ factorial(4)
 
 factorial(0)
 
-choose(5, 3)
+choose(5, 3) # Coeficiente Binomial
 
 choose(3,5)
 
@@ -80,6 +82,8 @@ log(4^6, 4)
 choose(5,2)
 
 sin(60*pi/180)
+
+cos(60)
 
 cos(60*pi/180)
 
@@ -155,27 +159,29 @@ x = sqrt(x)
 ## Función f(x) = x^3 - (3^x)* sen(x)
 f = function(x) {
   x^3 - (3^x) * sin(x)
-}
+  }
 
-f(4) # 4^3 - 3^4 * sin(4)
-f(5)
-f(pi/2)
+f(4) # 4^3 - 3^
 
 suma1 <- function(t){
   t + 1
 }
+
 suma1(6)
 suma1(-5)
 
 product <- function(x, y){
   x*y
 }
+
 product(5,7)
 
 g <- function(x,y,z) {
   exp(x^2 + y^2) * sin(z)
 }
+
 g(1, 2, 3)
+
 g(1, -1, pi)
 
 suma5 <- function(numero){
@@ -190,7 +196,7 @@ suma5(3)
 
 ls()
 
-rm(product)
+rm(f)
 
 ls()
 
@@ -212,7 +218,7 @@ complex(real = pi, imaginary = sqrt(2)) -> z1
 z1
 
 sqrt(-5)
-sqrt(as.complex(-5))
+sqrt(as.complex(-5)) # Debe ser tratado como complejo
 
 #La raíz cuadrada devuelve, de las dos soluciones la de
 #Re(z)>0, para obtener la otra,  hay que multiplicar por -1
