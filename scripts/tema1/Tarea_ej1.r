@@ -21,6 +21,7 @@
 
 #Tomamos el total de horas obtenido y calculamos a cuántos días equivalen:
 
+69444/24
 69444 %/% 24
 # 2893 días
 
