@@ -27,7 +27,7 @@ binomioNewton2(2,1)
 
 # BINOMIO DE NEWTON
 
-$$(a+b)^n = \sum_{k=0}^n {n\choose k}\cdot a^{n-k}\cdot b^k = {n\choose 0}\cdot a^n\cdot b^0+\cdots {n\choose n}\cdot a^0\cdot b^n$$
+$$(a+b)^n = \sum_{k=0}^n {n\choose k}\cdot a^{n-k}\cdot b^k = {n\choose 0}\cdot a^n\cdot b^0+\cdots +{n\choose n}\cdot a^0\cdot b^n$$
 
 # Función con R
 
