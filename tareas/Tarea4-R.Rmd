@@ -1,0 +1,125 @@
+---
+title: "LaTeX Y RMarkdown Tarea"
+author: "Yimmy Eman"
+date: '2022-06-29'
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pregunta 1
+
+Donde: 
+
+$$A = \begin{pmatrix}
+1 & 2 & 3 & 4 \\
+4 & 3 & 2 & 1 \\
+0 & 1 & 0 & 2 \\
+3 & 0 & 4 & 0 \\
+\end{pmatrix}$$
+
+$$B = \begin{pmatrix}
+4 & 3 & 2 & 1 \\
+0 & 3 & 0 & 4 \\
+1 & 2 & 3 & 4 \\
+0 & 1 & 0 & 2 \\
+\end{pmatrix}$$
+
+
+Realiza los siguientes productos de matrices siguiente en R:
+
+```{r}
+A = rbind(c(1,2,3,4), c(4,3,2,1), c(0,1,0,2), c(3,0,4,0))
+B = matrix(c(4,3,2,1,0,3,0,4,1,2,3,4,0,1,0,2), nrow = 4, byrow = T)
+A
+B
+```
+
+$A\cdot B$:
+
+```{r}
+A%*%B
+```
+
+$B\cdot A$:
+
+```{r}
+B%*%A
+```
+
+$(A \cdot B)^t$:
+
+```{r}
+t(A%*%B)
+```
+
+$B^t \cdot A$:
+
+```{r}
+t(B)%*%A
+```
+
+$(A \cdot B)^{-1}$:
+
+```{r}
+solve(A%*%B)
+```
+
+$A^{-1} \cdot B^t$:
+
+```{r}
+solve(A)%*%t(B)
+```
+
+
+## Pregunta 2
+
+Considera un vector de los numeros de tu DNI (puedes inventarselos) y llamalo dni. Por ejemplo, si tu DNI es 54201567K, tu vector sera
+
+$$dni = (5,4,2,0,1,5,6,7)$$
+Define el vector en `R`. Calcula con `R` el vector $dni$ al cuadrado, la raiz cuadrada del vector $dni$ y, por ultimo, la suma de todas las cifras del vector $dni$.
+
+Redacta todo tus resultados y utiliza \LaTeX, cuando pertoque.
+
+
+```{r}
+dni <- c(1,9,2,2,0,3,4,2)
+
+dni_cuadrado <- dni*dni
+dni_cuadrado
+dni_raiz <- sqrt(dni)
+dni_raiz
+suma <- sum(dni)
+suma
+
+```
+
+## Pregunta 3
+Considera el vector de las letras de tu nombre y apellido. 
+
+$$name = (M,A,R,I,A,S,A,N,T,O,S)$$
+
+Define dicho vector en `R`. Calcula el subvector que solo contenga tu nombre. Calcula tambien el subvector que contenga solo tu apellido. Ordenalo alfabeticamente. Crea una matriz con este vector.
+
+Redacta todos tus resultados y utiliza \LaTeX, cuando petoque. 
+
+```{r}
+name <- c('Y','I','M','M','Y','E','M','A','N')
+nombre <- name[1:5]
+nombre
+
+apellido <- name[6:9]
+apellido
+
+sort(nombre)
+sort(apellido)
+
+matriz <- matrix(name, nrow = 3, byrow = T)
+matriz
+```
+

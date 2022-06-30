@@ -1,0 +1,99 @@
+---
+title: "Tarea 1 R"
+author: "Yimmy Eman"
+date: '2022-06-27'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pregunta 1
+
+Si hubiéramos empezado a contar segundos a partir de las 12 campanadas que marcan el inicio de 2018, ¿a qué hora de qué día de qué año llegaríamos a los 250 millones de segundos? ¡Cuidado con los años bisiestos!
+
+*Sol*
+
+Primero llevamos 250000000 segundos a minutos
+```{r}
+250000000/60
+```
+
+Llevamos 4166667 minutos a horas
+
+```{r}
+4166667 / 60
+```
+Al no ser exacta la division, hacemos la division entera
+
+```{r}
+4166667 %/% 60
+```
+Y obtenemos el resto
+
+```{r}
+4166667 %% 60
+```
+27 minutos restan
+
+Ahora llevamos horas a dias, es claro ver que la division no es exacta por lo tanto repetimos el proceso
+```{r}
+69444 %/% 24 # div entera
+```
+
+```{r}
+69444 %% 24 # resto
+```
+```{r}
+2893 %/% 365
+```
+Entre 2018 y 2025 hay dos que son bisiestos, por lo tanto:
+
+```{r}
+(2893 %% 365) -2 # Le quitamos 2 dias  
+```
+Sumando al 1 de enero de 2018 7 años, 336 días, 12 horas y 27 minutos, obtenemos que pasados 250000000 de segundos, estaríamos en el 2 de diciembre de 2025 a las 12:27.
+
+
+## Pregunta 2
+Crea una función en R que resuelva una ecuación de primer grado (de la forma Ax + B = 0). Es decir, los
+parámetros deben ser los coeficientes (en orden) y la función tiene que devolver la solución. Por ejemplo, si
+la ecuación es 2x + 4 = 0, la función tendría que devolver -2.
+Una vez creada la función, utilízala para resolver las siguientes ecuaciones de primer grado:
+
+- 5x + 3 = 0
+- 7x + 4 = 18
+- x + 1 = 1
+
+```{r}
+ecuacion <- function(A, B){-B/A}
+```
+
+```{r}
+ecuacion(2,4)
+```
+```{r}
+ecuacion(5,3)
+```
+
+```{r}
+ecuacion(7,-14)
+```
+```{r}
+ecuacion(1,0)
+```
+
+## Pregunta 3
+
+
+```{r}
+round((3*exp(1)-pi),3)
+```
+
+
+## Pregunta 4
+```{r}
+round(Mod((2+3i)^2/(5+8i)), 3)
+```
+
