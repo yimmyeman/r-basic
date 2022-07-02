@@ -1,0 +1,75 @@
+---
+title: "Tarea11 - Repasando Estadística Descriptiva con Datos Cualitativos"
+author: "Yimmy Eman"
+date: '2022-07-01'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Pregunta 1
+Da la instrucción que defina la tabla de frecuencias absolutas de un vector llamado alumnos. 
+
+```{r}
+alumnos <- c(sample(c("Juan", "Pedro", "Maria", "Ana", "Jose", "Yimmy"), 
+                    size = 100, 
+                    replace = T ))
+table(alumnos)
+```
+
+
+## Pregunta 2
+Con una sola instrucción, define la tabla de frecuencias relativas de un vector llamado edades. 
+
+```{r}
+edades <- c(sample(18:35, size = 100, replace = T))
+prop.table(table(edades))
+```
+
+
+## Pregunta 3
+Con una sola instrucción, define la tabla bidimensional conjunta de frecuencias absolutas de dos vectores llamados altura y peso, de forma que las filas correspondan a altura y las columnas a peso.
+
+```{r}
+altura <- c(sample(c(1.76,1.45,1.4,1.90), size = 100, replace = T))
+peso <- c(sample(c(70,50, 47, 85), size = 100, replace = T))
+table(altura,peso)
+```
+
+
+## Pregunta 4
+Con una sola instrucción, define la tabla bidimensional conjunta de frecuencias relativas calculadas dentro del total, de dos vectores llamados edad y altura, de forma que las filas correspondan a altura y las columnas a edad.
+
+```{r}
+altura <- c(sample(c(1.76,1.45,1.4,1.90), size = 100, replace = T))
+edad <- c(sample(c(23,35, 40, 17), size = 100, replace = T))
+prop.table(table(altura,edad))
+```
+
+
+## Pregunta 5
+Con una sola instrucción, dibuja un diagrama de barras básico de un vector llamado edad. 
+
+
+```{r}
+barplot(table(edad))
+```
+
+## Pregunta 6
+Con una sola instrucción, dibuja un diagrama circular básico de un vector llamado alumnos. 
+
+```{r}
+pie(table(alumnos))
+```
+
+
+## Pregunta 7
+La tabla DNase es uno de los data frames que tiene predefinidos R. Da la instrucción que dibuje un diagrama de barras básico de la variable density de este mismo data frame.
+
+```{r}
+barplot(table(DNase$density))
+```
+

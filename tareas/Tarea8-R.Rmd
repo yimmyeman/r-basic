@@ -1,0 +1,77 @@
+---
+title: "Manejando Data Frames con R"
+author: "Yimmy Eman"
+date: '2022-07-01'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+df <- read.csv("../data/medals.csv", header = T)
+head(df,5)
+names(df)
+str(df)
+```
+
+## Pregunta 1
+¿Cuántos deportistas aparecen en el data frame?
+
+```{r}
+length(df$X)
+```
+
+
+## Pregunta 2
+¿Cuántos deportistas han ganado medallas de oro? ¿Cuántos han ganado medallas de plata? ¿Y cuántos de bronce?
+
+```{r}
+gold_meadals <- length(which(df$Medal == "Gold"))
+gold_meadals
+
+silver_medals <- length(which(df$Medal == "Silver"))
+silver_medals
+
+```
+
+
+## Pregunta 3
+¿En cuántos lugares se han hecho olimpiadas de invierno?
+
+```{r}
+df$City <- as.factor(df$City)
+length(levels(df$City))
+```
+
+
+## Pregunta 4
+¿Cuántos hombres y cuántas mujeres hay?
+
+```{r}
+woman_count <- length(df$Event.gender[which(df$Event.gender == "W")]) 
+woman_count
+
+men_count <- length(df$Event.gender[which(df$Event.gender == "M")])
+men_count
+```
+
+## Pregunta 5
+¿En qué año participaron más deportistas?
+
+```{r}
+as.numeric(names(which.max(table(df$Year))))
+```
+
+## Pregunta 6
+El campo NOC indica el país del ganador de la medalla. ¿Qué país puede presumir de haber ganado más medallas de oro en los juegos de invierno entre 1960 y 1996?
+
+```{r}
+df2 <- df[df$Medal == "Gold", ]
+df2 <- df2[which(df2$Year >= 1960 & df2$Year <= 1996), ]
+names(which.max(table(df2[,"NOC"])))
+```
+

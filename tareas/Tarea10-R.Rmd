@@ -1,0 +1,152 @@
+---
+title: "Tarea10"
+author: "Yimmy Eman"
+date: '2022-07-01'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Instala y carga el paquete MASS en R. En él hay una tabla de datos llamada birthwt sobre factores que pueden incidir en el peso de los niños al nacer.
+
+```{r}
+library(MASS)
+df <- birthwt
+```
+
+## Pregunta 1
+Utiliza str() y head() para explorar la estructura, y con help(), mirar el significado de cada variable. 
+
+```{r}
+str(df)
+head(df, 5)
+```
+
+### Significado de las variable:
+- low: Indicador de peso al nacer inferior a 2,5 kg.
+- race: raza de la madre (1 = blanca, 2 = negra, 3 = otra).
+
+
+## Pregunta 2
+Calcula una tabla de frecuencias relativas marginales de los pares raza de la madre y peso inferior a 2.5 kg o no, que permita ver si la raza de la madre influye en el peso del bebé.
+
+```{r}
+df1 <- df[,c("race", "low")]
+head(df1,10)
+prop.table(table(df1), margin = 1)
+```
+
+
+## Pregunta 3
+Dibuja un diagrama de mosaico de la tabla del ejercicio anterior.
+
+```{r}
+t <- table(df1)
+colnames(t) <- c("<2.5", ">2.5")
+rownames(t) <- c("white", "black", "other")
+plot(prop.table(t, margin = 1), 
+     col = c("lightblue", "lightyellow"), 
+     main = "Gráfico de mosaico variable \"race\" y \"low\"",
+     xlab = "Raza",
+     ylab = "Peso del Bebé")
+
+```
+
+
+## Pregunta 4
+Dibuja un diagrama bidimensional de barras, con las barras organizadas en bloques, que permita visualizar la información de los ejercicios anteriores. Aprovecha para poner nombres adecuados a los bloques, colores a las barras y añadir una leyenda que explique qué representa cada barra.
+
+```{r}
+
+barplot(prop.table(t, margin = 1), 
+        legend.text = row.names(t), 
+        beside = T, 
+        col = c("white", "darkgray", "lightgreen"),
+        ylim = c(0,0.9),
+        main = "Gráfico de barras variable \"race\" y \"low\"",
+        )
+```
+
+
+## Pregunta 5
+¿Se puede obtener alguna conclusión de la tabla y el diagrama de barras anterior? Argumenta tu respuesta.
+
+Se puede concluir que el peso de los bebés mayor a 2.5 kg la raza Negra supera a la raza Blanca por más del 50%.
+
+## Pregunta 6
+Repite los cuatro ejercicios anteriores para los pares madre fumadora o no, peso inferior a 2.5 kg o no y para los pares madre hipertensa o no y peso inferior a 2.5 kg o no.
+
+```{r}
+par(mfrow = c(1,2))
+df2 <- df[,c("smoke", "low")]
+t2 <- table(df2)
+colnames(t2) <- c("<2.5", ">2.5")
+rownames(t2) <- c("No Fumador", "Fumador")
+plot(prop.table(t2, margin = 1),
+                col = c("lightgray", "darkgray"), 
+                main = "Gráfico de mosaico variable \n\"smoke\" y \"low\"",
+                xlab = "Smoke",
+                ylab = "Peso del Bebé")
+
+barplot(prop.table(t2, margin = 1), 
+        legend.text = row.names(t2), 
+        beside = T,
+        ylim = c(0,0.9),
+        main = "Gráfico de barras variable \n\"smoke\" y \"low\"",
+        )
+par(mfrow = c(1,1))
+```
+```{r}
+par(mfrow = c(1,2))
+df3 <- df[, c("ht", "low")]
+t3 <- table(df3)
+colnames(t3) <- c("<2.5", ">2.5")
+rownames(t3) <- c("Sin Hipertención", "Con Hipertención")
+plot(prop.table(t3, margin = 1),
+                col = c("gray", "lightyellow"), 
+                main = "Gráfico de mosaico variable \n \"ht\" y \"low\"",
+                xlab = "Hipertención",
+                ylab = "Peso del Bebé")
+
+
+barplot(prop.table(t3, margin = 1), 
+        legend.text = row.names(t3), 
+        beside = T,
+        ylim = c(0,0.9),
+        col = c("gray", "lightyellow"),
+        main = "Gráfico de barras variable \n\"ht\" y \"low\"",
+        )
+par(mfrow = c(1,1))
+```
+
+Conclusión: Las Madres con diagnóstico de hipertensión tienden a tener bebés con peso inferior a 2.5kg.
+
+
+## Pregunta 7
+Calcula una tabla de frecuencias relativas marginales de la terna raza de la madre, madre fumadora o no y peso inferior a 2.5 kg o no, que permita ver si la raza de la madre y su condición de fumadora o no fumadora influyen en el peso del bebé.
+
+```{r}
+df4 <- df[,c("smoke", "low", "race")]
+t4 <- table(df4)
+prop.table(t4, margin = 1)
+```
+
+```{r}
+prop.table(t4, margin = c(1,3))
+```
+
+
+## Pregunta 8
+Dibuja un diagrama de mosaico de la tabla del ejercicio anterior.
+
+```{r}
+plot(prop.table(table(df[c("smoke", "low", "race")]), margin =c(1, 3)), 
+     main = "Gráfico de mosaico de las variables \"race\", \"smoke\" y \"low\"",
+     col =c("lightgreen","lightblue", "pink"))
+
+
+
+```
+
