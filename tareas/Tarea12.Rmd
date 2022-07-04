@@ -1,0 +1,118 @@
+---
+title: "Tarea 12"
+author: "Yimmy Eman"
+date: '2022-07-04'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pregunta 1
+
+Calcula la media, la mediana y la moda redondeada a dos cifras decimales de las notas numéricas de los exámenes tanto de forma conjunta como por estudio universitario. ¿En qué grupo observamos la nota másalta? ¿Qué grupo está por encima de la media de estudiantes?
+
+```{r}
+data = read.table("../data/grades.txt", header = T)
+```
+
+
+```{r}
+mean(data$nota, na.rm = T) # Media Global
+median(data$nota, na.rm = T) # Mediana Global
+```
+
+```{r}
+# Moda
+
+mod = function(col){
+  round(as.numeric(names(which(table(col) == max(table(col)))))[[1]],2)
+}
+```
+
+```{r}
+mod(data$nota)
+```
+
+```{r}
+aggregate(nota ~ estudio, data = data,
+          FUN = function(col){round(mean(col, na.rm = T), 2)})
+```
+```{r}
+aggregate(nota ~ estudio, data = data,
+          FUN =function(col){round(median(col, na.rm = T), 2)})
+```
+```{r}
+aggregate(nota ~ estudio, data = data,
+          FUN = mod)
+```
+¿En qué grupo observamos la nota más alta?
+
+```{r}
+notaM <- aggregate(nota ~ estudio, data = data,
+          FUN = function(col){round(max(col, na.rm = T),2)})
+notaM
+```
+El grupo que esta por encima de la media es el de Mates.
+
+## Pregunta 2
+
+¿En qué grupo observamos más variación de notas? Justifica tu respuesta.
+
+```{r}
+aggregate(nota ~ estudio, data = data,
+          FUN = function(col){var(col, na.rm = T)})
+```
+El grupo que tiene mayor varianza es el de Mates.
+
+## Pregunta 3
+
+¿Hay mucha diferencia entre el grupo que has respondido en el ejercicio 1 y en el ejercicio 2? Intenta dar una explicación objetiva del suceso.
+
+
+Hay diferencias entre ambos grupos. Por ejemplo, la nota máxima de Industrial ha sido un `r notaM[1,2]`, mientras quela de Mates ha sido un 8.54. No obstante, el grupo de Mates tiene una media de 4.22, mientras que el grupo de Industrial ha sacado de media un 3.58. Lo que nos lleva a concluir que en general, parece haber ido mejor el examen en el grupo de Mates que no en el de Industrial. Finalmente, la varianza del grupo de Industriales ligeramente menor a la de Mates. La primera con 4.04 y la segunda, de 4.82.
+
+
+
+## Pregunta 4
+
+Dibuja en un único gráfico los cuatro diagramas de caja, uno para cada grupo. Añade también la nota media,pon nombre, título y color al gráfico para documentarlo correctamente.
+
+
+```{r}
+boxplot(nota ~ estudio, data = data,
+        ylab = "Notas de los Estudiantes",
+        xlab = "Materia",
+        main = "Boxplot de las notas de los estudiantes por Materia",
+        col = c("dodgerblue", "firebrick4","aquamarine2","gold"))
+means = aggregate(nota ~ estudio, data = data, FUN = mean)
+points(means, col = "blue", pch = 23)
+```
+
+## Pregunta 5
+
+¿Observas algunos valores atípicos en el boxplot anterior? ¿A qué grupo pertence?
+
+Todos los grupos salvo Mates tienen un otulier o dato atípico.
+
+## Pregunta 6
+
+Indica a partir del boxplot anterior en qué grupo observamos más variedad de notas.
+
+En el grupo de Mates, pues es el grupo con la caja más grande. Además coincide con la conclusión a la quese llegó en el Ejercicio 2.
+
+## Pregunta 7
+
+En base a todo lo anterior, ¿puedes afirmar de forma estadística que el examen de carrera ha ido mejor enalgún estudio que en los demás?
+
+
+Ha ido mejor en el grupo de Mates pues no solamente cuenta con la media por estudio más alta, sino que lamediana por estudio del grupo Mates también es la más alta. Si bien es cierto que ha habido más variaciónde notas con respecto al resto de grupos, en general el grupo de Mates es al que mejor le ha ido el examende carrera.
+
+
+
+
+
+
