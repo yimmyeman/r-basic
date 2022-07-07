@@ -2,11 +2,15 @@
 title: "Diamantes"
 author: "Curso de Estadística Descriptiva"
 date: "8/1/2019"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+rm(list = ls())
+library(reticulate)
 ```
 
 # Análisis de los diamantes
@@ -15,9 +19,8 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 import numpy as np
 import pandas as pd
 import matplotlib
-from ggplot import diamonds
 
-matplotlib.style.use("ggplot")
+diamonds = pd.read_csv("/Users/yimmy/Documents/GitHub/r-basic/data/diamonds.csv")
 
 print(diamonds.shape)
 print(diamonds.head(10))

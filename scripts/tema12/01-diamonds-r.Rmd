@@ -1,0 +1,65 @@
+---
+title: "Diamonds in R"
+author: "Yimmy Eman"
+date: '2022-07-07'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Análisis de los diamantes
+
+```{r}
+diamonds <- read.csv("../../data/diamonds.csv")
+dim(diamonds)
+head(diamonds)
+```
+
+## Histograma
+
+```{r}
+hist(diamonds$carat, breaks = 50, col = "lightblue", xlim = c(0,3.5))
+```
+## Filtro de outliers
+```{r}
+subset(diamonds, diamonds$carat >3.5)
+```
+## Boxplots
+
+```{r}
+boxplot(diamonds$price)
+```
+
+```{r}
+boxplot(diamonds$price ~ diamonds$clarity)
+```
+```{r}
+boxplot(diamonds$carat ~ diamonds$clarity)
+```
+## Densidades
+
+```{r}
+plot(density(diamonds$carat), col = "gray")
+```
+
+## Tabla de frecuencias y Barplot
+
+```{r}
+table(diamonds$clarity)
+barplot(table(diamonds$clarity))
+```
+
+```{r}
+table(diamonds$clarity, diamonds$color)
+barplot(table(diamonds$clarity, diamonds$color), beside = FALSE)
+barplot(table(diamonds$clarity, diamonds$color), beside = TRUE)
+```
+
+## Scatterplot
+
+```{r}
+plot(diamonds$carat, diamonds$price, col = "gray", pch = 21, cex = 0.4, ylim = c(0,20000))
+```
+
