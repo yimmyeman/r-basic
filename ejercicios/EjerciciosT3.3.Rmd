@@ -22,9 +22,15 @@ $$(a+b)^2 = a^2+2ab+b^2$$
 binomioNewton2 = function(a,b){
   a^2+2*a*b+b^2
 }
+```
+
+
+```{r}
 binomioNewton2(1,2)
 binomioNewton2(2,1)
+binomioNewton2(7,-5)
 ```
+
 
 # BINOMIO DE NEWTON
 
